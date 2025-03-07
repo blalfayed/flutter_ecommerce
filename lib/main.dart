@@ -1,4 +1,4 @@
-import 'package:ecommerce/core/configs/theme/theme/app_theme.dart';
+import 'package:ecommerce/core/configs/theme/app_theme.dart';
 import 'package:ecommerce/presentation/splash/bloc/splash_cubit.dart';
 import 'package:ecommerce/presentation/splash/pages/splash.dart';
 import 'package:flutter/material.dart';

@@ -1,5 +1,6 @@
 import 'package:ecommerce/common/helpr/navigator/app_navigator.dart';
-import 'package:ecommerce/core/configs/theme/theme/app_colors.dart';
+import 'package:ecommerce/common/widgets/appbar/app_bar.dart';
+import 'package:ecommerce/core/configs/theme/app_colors.dart';
 import 'package:ecommerce/presentation/auth/pages/enter_password.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -12,8 +13,11 @@ class SigininPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: const BasicAppbar(
+        hideBack: true,
+      ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 80),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 40),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -52,7 +56,7 @@ class SigininPage extends StatelessWidget {
   Widget _continueButton(BuildContext context) {
     return BasicAppButton(
       onPressed: () {
-        AppNavigator.pushReplacement(context, const EnterPasswordPage());
+        AppNavigator.push(context, const EnterPasswordPage());
       },
       title: 'continue',
     );
