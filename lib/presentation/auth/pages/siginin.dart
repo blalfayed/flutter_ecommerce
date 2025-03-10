@@ -8,8 +8,8 @@ import 'package:flutter/material.dart';
 
 import '../../../common/widgets/button/basic_app_button.dart';
 
-class SigininPage extends StatelessWidget {
-  const SigininPage({super.key});
+class SigninPage extends StatelessWidget {
+  const SigninPage({super.key});
 
   @override
   Widget build(BuildContext context) {
