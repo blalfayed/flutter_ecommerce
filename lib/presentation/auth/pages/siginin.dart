@@ -1,7 +1,8 @@
-import 'package:ecommerce/common/helpr/navigator/app_navigator.dart';
+import 'package:ecommerce/common/helper/navigator/app_navigator.dart';
 import 'package:ecommerce/common/widgets/appbar/app_bar.dart';
 import 'package:ecommerce/core/configs/theme/app_colors.dart';
 import 'package:ecommerce/presentation/auth/pages/enter_password.dart';
+import 'package:ecommerce/presentation/auth/pages/signup.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
@@ -13,9 +14,7 @@ class SigininPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const BasicAppbar(
-        hideBack: true,
-      ),
+      appBar: const BasicAppbar(),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 40),
         child: Column(
@@ -71,7 +70,10 @@ class SigininPage extends StatelessWidget {
           const TextSpan(text: "Don't you have an account?"),
           TextSpan(
             text: 'create one',
-            recognizer: TapGestureRecognizer()..onTap = () {},
+            recognizer: TapGestureRecognizer()
+              ..onTap = () {
+                AppNavigator.push(context, SignupPage());
+              },
           ),
         ],
       ),
