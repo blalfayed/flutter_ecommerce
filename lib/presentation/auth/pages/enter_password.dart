@@ -1,14 +1,22 @@
+import 'package:ecommerce/common/bloc/button/button_state_cubit.dart';
 import 'package:ecommerce/common/helper/navigator/app_navigator.dart';
 import 'package:ecommerce/common/widgets/appbar/app_bar.dart';
+import 'package:ecommerce/common/widgets/button/basic_reactive_button.dart';
 import 'package:ecommerce/core/configs/theme/app_colors.dart';
+import 'package:ecommerce/data/auth/models/user_signin_req.dart';
+import 'package:ecommerce/domain/auth/usecases.dart/signin.dart';
 import 'package:ecommerce/presentation/auth/pages/forgot_password.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../common/widgets/button/basic_app_button.dart';
+import '../../../common/bloc/button/button_state.dart';
 
 class EnterPasswordPage extends StatelessWidget {
-  const EnterPasswordPage({super.key});
+  final UserSigninReq signinReq;
+  EnterPasswordPage({required this.signinReq, super.key});
+
+  final TextEditingController _passwordCon = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -16,23 +24,38 @@ class EnterPasswordPage extends StatelessWidget {
       appBar: const BasicAppbar(),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 40),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            _sigininText(context),
-            const SizedBox(
-              height: 20,
+        child: BlocProvider(
+          create: (context) => ButtonStateCubit(),
+          child: BlocListener<ButtonStateCubit, ButtonState>(
+            listener: (context, state) {
+              if (state is ButtonFailureState) {
+                var snackbar = SnackBar(
+                  content: Text(state.errorMessage),
+                  behavior: SnackBarBehavior.floating,
+                );
+                ScaffoldMessenger.of(context).showSnackBar(snackbar);
+              }
+              if (state is ButtonSuccessState) {}
+            },
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _sigininText(context),
+                const SizedBox(
+                  height: 20,
+                ),
+                _passwordField(context),
+                const SizedBox(
+                  height: 20,
+                ),
+                _continueButton(context),
+                const SizedBox(
+                  height: 20,
+                ),
+                _forgotPassword(context)
+              ],
             ),
-            _passwordField(context),
-            const SizedBox(
-              height: 20,
-            ),
-            _continueButton(),
-            const SizedBox(
-              height: 20,
-            ),
-            _forgotPassword(context)
-          ],
+          ),
         ),
       ),
     );
@@ -46,16 +69,24 @@ class EnterPasswordPage extends StatelessWidget {
   }
 
   Widget _passwordField(BuildContext context) {
-    return const TextField(
-      decoration: InputDecoration(hintText: 'Enter Password '),
+    return TextField(
+      controller: _passwordCon,
+      decoration: const InputDecoration(hintText: 'Enter Password '),
     );
   }
 
-  Widget _continueButton() {
-    return BasicAppButton(
-      onPressed: () {},
-      title: 'continue',
-    );
+  Widget _continueButton(BuildContext context) {
+    return Builder(builder: (context) {
+      return BasicReactiveButton(
+        onPressed: () {
+          signinReq.password = _passwordCon.text;
+          context
+              .read<ButtonStateCubit>()
+              .execute(usecase: SigninUseCase(), params: signinReq);
+        },
+        title: 'continue',
+      );
+    });
   }
 
   Widget _forgotPassword(BuildContext context) {
@@ -75,7 +106,7 @@ class EnterPasswordPage extends StatelessWidget {
               text: 'reset',
               recognizer: TapGestureRecognizer()
                 ..onTap = () {
-                  AppNavigator.push(context, const ForgotPasswordPage());
+                  AppNavigator.push(context, ForgotPasswordPage());
                 }),
         ],
       ),
