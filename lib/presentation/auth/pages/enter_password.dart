@@ -4,8 +4,9 @@ import 'package:ecommerce/common/widgets/appbar/app_bar.dart';
 import 'package:ecommerce/common/widgets/button/basic_reactive_button.dart';
 import 'package:ecommerce/core/configs/theme/app_colors.dart';
 import 'package:ecommerce/data/auth/models/user_signin_req.dart';
-import 'package:ecommerce/domain/auth/usecases.dart/signin.dart';
+import 'package:ecommerce/domain/auth/usecases/signin.dart';
 import 'package:ecommerce/presentation/auth/pages/forgot_password.dart';
+import 'package:ecommerce/presentation/home/pages/home.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -35,7 +36,9 @@ class EnterPasswordPage extends StatelessWidget {
                 );
                 ScaffoldMessenger.of(context).showSnackBar(snackbar);
               }
-              if (state is ButtonSuccessState) {}
+              if (state is ButtonSuccessState) {
+                AppNavigator.pushAndRemove(context, const HomePage());
+              }
             },
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -78,14 +81,13 @@ class EnterPasswordPage extends StatelessWidget {
   Widget _continueButton(BuildContext context) {
     return Builder(builder: (context) {
       return BasicReactiveButton(
-        onPressed: () {
-          signinReq.password = _passwordCon.text;
-          context
-              .read<ButtonStateCubit>()
-              .execute(usecase: SigninUseCase(), params: signinReq);
-        },
-        title: 'continue',
-      );
+          onPressed: () {
+            signinReq.password = _passwordCon.text;
+            context
+                .read<ButtonStateCubit>()
+                .execute(usecase: SigninUseCase(), params: signinReq);
+          },
+          title: 'Continue');
     });
   }
 
