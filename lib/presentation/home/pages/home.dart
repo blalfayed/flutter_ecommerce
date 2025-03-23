@@ -2,6 +2,7 @@ import 'package:ecommerce/presentation/home/widgets/categories.dart';
 import 'package:ecommerce/presentation/home/widgets/header.dart';
 import 'package:flutter/material.dart';
 
+import '../widgets/new_in.dart';
 import '../widgets/search_field.dart';
 import '../widgets/top_selling.dart';
 
@@ -27,6 +28,10 @@ class HomePage extends StatelessWidget {
               height: 24,
             ),
             TopSelling(),
+            SizedBox(
+              height: 24,
+            ),
+            NewIn()
           ],
         ),
       ),

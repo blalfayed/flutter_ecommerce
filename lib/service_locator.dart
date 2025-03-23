@@ -17,6 +17,8 @@ import 'package:ecommerce/domain/product/repository/product.dart';
 import 'package:ecommerce/domain/product/usecases/get_top_selling.dart';
 import 'package:get_it/get_it.dart';
 
+import 'domain/product/usecases/get_new_in.dart';
+
 final sl = GetIt.instance;
 
 Future<void> initializeDependencies() async {
@@ -37,4 +39,5 @@ Future<void> initializeDependencies() async {
   sl.registerSingleton<GetUserUseCase>(GetUserUseCase());
   sl.registerSingleton<GetCategoriesUseCase>(GetCategoriesUseCase());
   sl.registerSingleton<GetTopSellingUseCase>(GetTopSellingUseCase());
+  sl.registerSingleton<GetNewInUseCase>(GetNewInUseCase());
 }
