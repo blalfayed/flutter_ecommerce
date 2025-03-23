@@ -7,7 +7,7 @@ import 'package:ecommerce/service_locator.dart';
 class CategoryRepositoryImpl implements CategoryRepository {
   @override
   Future<Either> getCategories() async {
-    var categories = await s1<CategoryFirebaseService>().getCategories();
+    var categories = await sl<CategoryFirebaseService>().getCategories();
 
     return categories.fold((error) {
       return left(error);

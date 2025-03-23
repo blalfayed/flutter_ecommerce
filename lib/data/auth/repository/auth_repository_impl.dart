@@ -10,32 +10,32 @@ import '../../../service_locator.dart';
 class AuthRepositoryImpl extends AuthRepository {
   @override
   Future<Either> signup(UserCreationReq user) async {
-    return await s1<AuthFirebaseService>().signup(user);
+    return await sl<AuthFirebaseService>().signup(user);
   }
 
   @override
   Future<Either> getAges() async {
-    return await s1<AuthFirebaseService>().getAges();
+    return await sl<AuthFirebaseService>().getAges();
   }
 
   @override
   Future<Either> signin(UserSigninReq user) async {
-    return await s1<AuthFirebaseService>().signin(user);
+    return await sl<AuthFirebaseService>().signin(user);
   }
 
   @override
   Future<Either> sendPasswordandResetEmail(String email) async {
-    return await s1<AuthFirebaseService>().sendPasswordandResetEmail(email);
+    return await sl<AuthFirebaseService>().sendPasswordandResetEmail(email);
   }
 
   @override
   Future<bool> isLoggedIn() async {
-    return await s1<AuthFirebaseService>().isLoggedIn();
+    return await sl<AuthFirebaseService>().isLoggedIn();
   }
 
   @override
   Future<Either> getUser() async {
-    var user = await s1<AuthFirebaseService>().getUser();
+    var user = await sl<AuthFirebaseService>().getUser();
 
     return user.fold((error) {
       return left(error);

@@ -7,7 +7,7 @@ class CategoriesDisplayCubit extends Cubit<CategoriesDisplayState> {
   CategoriesDisplayCubit() : super(CategoriesLoading());
 
   void displayCategories() async {
-    var returnedData = await s1<GetCategoriesUseCase>().call();
+    var returnedData = await sl<GetCategoriesUseCase>().call();
 
     return returnedData.fold((error) {
       emit(LoadCategoriesFailure());

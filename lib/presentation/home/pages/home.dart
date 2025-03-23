@@ -3,6 +3,7 @@ import 'package:ecommerce/presentation/home/widgets/header.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/search_field.dart';
+import '../widgets/top_selling.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -21,7 +22,11 @@ class HomePage extends StatelessWidget {
             SizedBox(
               height: 24,
             ),
-            Categories()
+            Categories(),
+            SizedBox(
+              height: 24,
+            ),
+            TopSelling(),
           ],
         ),
       ),

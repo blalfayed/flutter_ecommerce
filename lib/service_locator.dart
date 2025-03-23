@@ -2,6 +2,8 @@ import 'package:ecommerce/data/auth/repository/auth_repository_impl.dart';
 import 'package:ecommerce/data/auth/source/auth_firebase_service.dart';
 import 'package:ecommerce/data/category/repository/category.dart';
 import 'package:ecommerce/data/category/source/category_firebase_service.dart';
+import 'package:ecommerce/data/product/repository/product.dart';
+import 'package:ecommerce/data/product/source/product_firebase_service.dart';
 import 'package:ecommerce/domain/auth/repository/auth.dart';
 import 'package:ecommerce/domain/auth/usecases/get_ages.dart';
 import 'package:ecommerce/domain/auth/usecases/get_user.dart';
@@ -11,24 +13,28 @@ import 'package:ecommerce/domain/auth/usecases/signin.dart';
 import 'package:ecommerce/domain/auth/usecases/signup.dart';
 import 'package:ecommerce/domain/category/repository/category.dart';
 import 'package:ecommerce/domain/category/usecases/get_categories.dart';
+import 'package:ecommerce/domain/product/repository/product.dart';
+import 'package:ecommerce/domain/product/usecases/get_top_selling.dart';
 import 'package:get_it/get_it.dart';
 
-final s1 = GetIt.instance;
+final sl = GetIt.instance;
 
 Future<void> initializeDependencies() async {
-  s1.registerSingleton<AuthFirebaseService>(AuthFirebaseServiceImpl());
-  s1.registerSingleton<CategoryFirebaseService>(CategoryFirebaseServiceImpl());
+  sl.registerSingleton<AuthFirebaseService>(AuthFirebaseServiceImpl());
+  sl.registerSingleton<CategoryFirebaseService>(CategoryFirebaseServiceImpl());
+  sl.registerSingleton<ProductFirebaseService>(ProductFirebaseServiceImpl());
 
-  s1.registerSingleton<AuthRepository>(AuthRepositoryImpl());
-  s1.registerSingleton<CategoryRepository>(CategoryRepositoryImpl());
+  sl.registerSingleton<AuthRepository>(AuthRepositoryImpl());
+  sl.registerSingleton<CategoryRepository>(CategoryRepositoryImpl());
+  sl.registerSingleton<ProductRepository>(ProductRepositoryImpl());
 
-  s1.registerSingleton<SignupUseCase>(SignupUseCase());
-
-  s1.registerSingleton<GetAgesUseCase>(GetAgesUseCase());
-  s1.registerSingleton<SigninUseCase>(SigninUseCase());
-  s1.registerSingleton<SendPasswordResetEmailUseCase>(
+  sl.registerSingleton<SignupUseCase>(SignupUseCase());
+  sl.registerSingleton<GetAgesUseCase>(GetAgesUseCase());
+  sl.registerSingleton<SigninUseCase>(SigninUseCase());
+  sl.registerSingleton<SendPasswordResetEmailUseCase>(
       SendPasswordResetEmailUseCase());
-  s1.registerSingleton<IsLoggedInUseCase>(IsLoggedInUseCase());
-  s1.registerSingleton<GetUserUseCase>(GetUserUseCase());
-  s1.registerSingleton<GetCategoriesUseCase>(GetCategoriesUseCase());
+  sl.registerSingleton<IsLoggedInUseCase>(IsLoggedInUseCase());
+  sl.registerSingleton<GetUserUseCase>(GetUserUseCase());
+  sl.registerSingleton<GetCategoriesUseCase>(GetCategoriesUseCase());
+  sl.registerSingleton<GetTopSellingUseCase>(GetTopSellingUseCase());
 }

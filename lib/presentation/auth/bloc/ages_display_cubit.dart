@@ -8,7 +8,7 @@ class AgesDisplayCubit extends Cubit<AgesDisplayState> {
   AgesDisplayCubit() : super(AgesLoading());
 
   void displayAges() async {
-    var returnedData = await s1<GetAgesUseCase>().call();
+    var returnedData = await sl<GetAgesUseCase>().call();
 
     returnedData.fold((message) {
       emit(AgesLoadFailure(message: message));

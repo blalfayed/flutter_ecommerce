@@ -7,6 +7,6 @@ import '../repository/auth.dart';
 class GetUserUseCase implements UseCase<Either, dynamic> {
   @override
   Future<Either> call({dynamic params}) async {
-    return await s1<AuthRepository>().getUser();
+    return await sl<AuthRepository>().getUser();
   }
 }

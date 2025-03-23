@@ -7,6 +7,6 @@ import '../../../service_locator.dart';
 class GetAgesUseCase implements UseCase<Either, dynamic> {
   @override
   Future<Either> call({dynamic params}) async {
-    return await s1<AuthRepository>().getAges();
+    return await sl<AuthRepository>().getAges();
   }
 }

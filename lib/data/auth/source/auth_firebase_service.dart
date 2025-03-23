@@ -105,9 +105,9 @@ class AuthFirebaseServiceImpl extends AuthFirebaseService {
           .doc(currentUser?.uid)
           .get()
           .then((value) => value.data());
-      return right(userData);
+      return Right(userData);
     } catch (e) {
-      return left('please try again');
+      return const Left('please try again');
     }
   }
 }
